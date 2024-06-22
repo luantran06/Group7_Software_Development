@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Register - Tastebuds</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="header section" data-header>
+    <div class="container">
+      <a href="#" class="logo">
+        <img src=".\picture\logo.svg" width="100" height="40" alt="Tastebuds logo">
+      </a>
+      <nav class="navbar" data-navbar>
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <a href="index.html" class="navbar-link hover:underline" data-nav-link>Home</a>
+          </li>
+          <li class="navbar-item">
+            <a href="index.html" class="navbar-link hover:underline" data-nav-link>Recent Post</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="register-section">
+      <div class="container">
+        <h2>Register</h2>
+        <form id="registerForm" class="form">
+          <label for="registerUsername">Username:</label>
+          <input type="text" id="registerUsername" name="username" required>
+          <label for="registerEmail">Email:</label>
+          <input type="email" id="registerEmail" name="email" required>
+          <label for="registerPassword">Password:</label>
+          <input type="password" id="registerPassword" name="password" required>
+          <button type="submit" class="btn">Register</button>
+          <p>Already have an account? <a href="login.html">Log in</a></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+</body>
+
+</html>
