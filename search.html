@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Restaurants - Tastebuds</title>
+    <link rel="shortcut icon" href=".picture\logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href=".\style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header section" data-header>
+        <div class="container">
+            <a href="#" class="logo">
+                <img src=".\picture\logo.svg" width="100" height="40" alt="Tastebuds logo">
+            </a>
+            <nav class="navbar" data-navbar>
+                <ul class="navbar-list">
+                    <li class="navbar-item"><a href="index.html" class="navbar-link hover:underline" data-nav-link>Home</a></li>
+                    <li class="navbar-item"><a href="recent-post.html" class="navbar-link hover:underline" data-nav-link>Recent Post</a></li>
+                </ul>
+            </nav>
+            <div class="wrapper">
+                <button class="search-btn" aria-label="search" data-search-toggler>
+                    <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+                    <span class="span">Search</span>
+                </button>
+                <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
+                    <span class="span one"></span>
+                    <span class="span two"></span>
+                    <span class="span three"></span>
+                </button>
+                <a href="login.html" class="btn">Log in</a>
+                <a href="register.html" class="btn">Register</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="section search" aria-label="search restaurants">
+        <div class="container">
+            <h2 class="h2 section-title">Search for Restaurants</h2>
+            <form action="" class="search-form">
+                <input type="text" name="search" placeholder="Search restaurants..." class="search-field">
+                <select name="category" class="category-dropdown">
+                    <option value="" disabled selected>Choose a category</option>
+                    <option value="american">American</option>
+                    <option value="mexican">Mexican</option>
+                    <option value="asian">Asian</option>
+                    <option value="indian">Indian</option>
+                    <option value="vegan">Vegan</option>
+                </select>
+                <button type="submit" class="btn">Search</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="section categories" aria-label="categories">
+        <div class="container">
+            <h2 class="h2 section-title">Categories</h2>
+            <ul class="category-list">
+                <li><a href="#" class="category-item">American</a></li>
+                <li><a href="#" class="category-item">Mexican</a></li>
+                <li><a href="#" class="category-item">Asian</a></li>
+                <li><a href="#" class="category-item">Indian</a></li>
+                <li><a href="#" class="category-item">Vegan</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <script src="./assets/js/script.js" defer></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
