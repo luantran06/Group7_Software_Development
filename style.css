@@ -1001,7 +1001,7 @@
   
   
     /**
-     * REUSED STYLE
+     * REUSED STYLE - Search Page
      */
   
     .section { margin-inline: 70px; }
@@ -1054,3 +1054,54 @@
     }
   
   }
+
+
+/* Add styles for the new sections */
+.section {
+    padding: 20px 0;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-field {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--light-gray-1);
+    border-radius: var(--radius-16);
+}
+
+.category-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.category-item {
+    padding: 10px 20px;
+    background-color: var(--light-gray-1);
+    border: 1px solid var(--light-gray-2);
+    border-radius: var(--radius-16);
+    cursor: pointer;
+}
+
+.category-item:hover {
+    background-color: var(--gainsboro);
+}
+
+.results-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.results-item {
+    width: calc(33.333% - 20px);
+    padding: 20px;
+    border: 1px solid var(--light-gray-2);
+    border-radius: var(--radius-16);
+    background-color: var(--white);
+}
