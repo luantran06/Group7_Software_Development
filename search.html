@@ -46,16 +46,8 @@
     <section class="section search" aria-label="search restaurants">
         <div class="container">
             <h2 class="h2 section-title">Search for Restaurants</h2>
-            <form action="" class="search-form">
-                <input type="text" name="search" placeholder="Search restaurants..." class="search-field">
-                <select name="category" class="category-dropdown">
-                    <option value="" disabled selected>Choose a category</option>
-                    <option value="american">American</option>
-                    <option value="mexican">Mexican</option>
-                    <option value="asian">Asian</option>
-                    <option value="indian">Indian</option>
-                    <option value="vegan">Vegan</option>
-                </select>
+            <form action="search_results.html" method="GET" class="search-form">
+                <input type="text" name="search" placeholder="e.g. tacos, Mel's" class="search-field">
                 <button type="submit" class="btn">Search</button>
             </form>
         </div>
@@ -66,11 +58,11 @@
         <div class="container">
             <h2 class="h2 section-title">Categories</h2>
             <ul class="category-list">
-                <li><a href="#" class="category-item">American</a></li>
-                <li><a href="#" class="category-item">Mexican</a></li>
-                <li><a href="#" class="category-item">Asian</a></li>
-                <li><a href="#" class="category-item">Indian</a></li>
-                <li><a href="#" class="category-item">Vegan</a></li>
+                <li><a href="category.html?category=american" class="category-item">American</a></li>
+                <li><a href="category.html?category=mexican" class="category-item">Mexican</a></li>
+                <li><a href="category.html?category=asian" class="category-item">Asian</a></li>
+                <li><a href="category.html?category=indian" class="category-item">Indian</a></li>
+                <li><a href="category.html?category=vegan" class="category-item">Vegan</a></li>
             </ul>
         </div>
     </section>
