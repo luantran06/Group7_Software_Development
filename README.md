@@ -23,3 +23,15 @@ Review website/application
 - St. Cecilia
 - Ruby Chow
 -
+create a table for "user"
+CREATE TABLE users (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(200) NOT NULL UNIQUE,
+    phone VARCHAR(20) NOT NULL,
+    address VARCHAR(200) NOT NULL,
+    password VARCHAR(200) NOT NULL,
+    role VARCHAR(20) NOT NULL DEFAULT 'client',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
