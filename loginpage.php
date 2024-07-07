@@ -1,3 +1,6 @@
+<?php
+include "layout/header.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,3 +31,6 @@
 </div>
 </body>
 </html>
+<?php
+include "layout/footer.php";
+?>

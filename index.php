@@ -54,7 +54,7 @@ $authinticated = false;
         <ul class="navbar-list">
 
         <li class="navbar-item">
-            <a href="#" class="navbar-link hover:underline" data-nav-link>Home</a>
+            <a href="index.php" class="navbar-link hover:underline" data-nav-link>Home</a>
         </li>
 
         <li class="navbar-item">
