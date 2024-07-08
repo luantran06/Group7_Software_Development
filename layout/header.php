@@ -1,6 +1,9 @@
 <?php
 session_start();
 $authenticated = false;
+if (isset($_SESSION['email'])) {
+  $authenticated = true;
+}
 ?>
 
 <!DOCTYPE html>
@@ -27,6 +30,7 @@ $authenticated = false;
     - custom css link
   -->
   <link rel="stylesheet" href="./style.css">
+  
 
   <!-- 
     - google font link
@@ -64,7 +68,7 @@ $authenticated = false;
 
           <?php if ($authenticated): ?>
             <li class="navbar-item dropdown">
-              <a href="#" class="navbar-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+              <a href="#" class="navbar-link hover:underline" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="/profile.php">Profile</a></li>
                 <li><hr class="dropdown-divider"></li>

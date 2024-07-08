@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    margin: 100;
+    padding: 100;
     background-color: #f0f0f0;
 }
 
@@ -16,14 +16,15 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    min-height: calc(100vh - 100px); /* Adjust height calculation as needed */
+    margin-top: 50px;
 }
 
 .card {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 20px; /* Reduced padding */
     width: 300px;
     text-align: center;
 }
@@ -41,7 +42,7 @@ label {
 input[type="text"],
 input[type="password"],
 input[type="email"] {
-    width: calc(100% - 10px);
+    width: calc(100% - 20px); /* Adjusted width to account for padding */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;

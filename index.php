@@ -1,6 +1,9 @@
 <?php
 session_start();
-$authinticated = false;
+$authenticated = false;
+if (isset($_SESSION['email'])) {
+    $authenticated = true;
+}
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +61,7 @@ $authinticated = false;
         </li>
 
         <li class="navbar-item">
-            <a href="#" class="navbar-link hover:underline" data-nav-link>Recent Post</a>
+            <a href="index.php" class="navbar-link hover:underline" data-nav-link>Recent Post</a>
         </li>
 
         <li class="navbar-item">
@@ -66,15 +69,17 @@ $authinticated = false;
         </li>
 
         <?php
-        if ($authinticated) {
+        if ($authenticated) {
         ?>
 
         <li class="navbar-item dropdown">
-            <a  class="navbar-link hover:underline" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+            <a href="#" class="navbar-link hover:underline" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <?= htmlspecialchars($_SESSION['first_name']) ?>
+            </a>
         <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="/profile.php">Profile</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="/logout.php">Logout</a></li>
+                <li><a href="/logout.php" class="dropdown-item" >Logout</a></li>
         </ul>
         </li>
             
