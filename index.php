@@ -1321,7 +1321,24 @@ if (isset($_SESSION['email'])) {
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const navToggler = document.querySelector("[data-nav-toggler]");
+    const navbar = document.querySelector("[data-navbar]");
 
+    navToggler.addEventListener("click", function () {
+      navbar.classList.toggle("active");
+      navToggler.classList.toggle("active");
+    });
+
+    document.addEventListener("click", function(event) {
+      if (!navbar.contains(event.target) && !navToggler.contains(event.target)) {
+        navbar.classList.remove("active");
+        navToggler.classList.remove("active");
+      }
+    });
+  });
+</script>
 </body>
 
 </html>
