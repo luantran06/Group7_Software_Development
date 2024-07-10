@@ -17,19 +17,19 @@ if (isset($_SESSION['email'])) {
   <!-- 
     - primary meta tags
   -->
-  <title>Tastebuds - Hey, we’re Tastebuds. See our thoughts, stories and restaurants.</title>
+  <title>Search Restaurants - Tastebuds</title>
   <meta name="title" content="Tastebuds - Hey, we’re Tastebuds. See our thoughts, stories and restaurants.">
   <meta name="description" content="This is a restaurant review blog.">
 
   <!-- 
     - favicon
   -->
-  <link rel="shortcut icon" href=".picture\logo.svg" type="image/svg+xml">
+  <link rel="shortcut icon" href="./picture/logo.svg" type="image/svg+xml">
 
   <!-- 
     - custom css link
   -->
-  <link rel="stylesheet" href=".\style.css">
+  <link rel="stylesheet" href="./style.css">
 
   <!-- 
     - google font link
@@ -49,8 +49,8 @@ if (isset($_SESSION['email'])) {
   <header class="header section" data-header>
     <div class="container">
 
-      <a href="#" class="logo">
-        <img src=".\picture\logo.svg" width="100" height="40" alt="Tastebuds logo">
+      <a href="index.php" class="logo">
+        <img src="./picture/logo.svg" width="100" height="40" alt="Tastebuds logo">
       </a>
 
       <nav class="navbar" data-navbar>
@@ -61,8 +61,11 @@ if (isset($_SESSION['email'])) {
         </li>
 
         <li class="navbar-item">
-            <a href="index.php" class="navbar-link hover:underline" data-nav-link>Recent Post</a>
+            <a href="recent-post.php" class="navbar-link hover:underline" data-nav-link>Recent Post</a>
         </li>
+
+        </ul>
+      </nav>
 
         <div class="wrapper">
                  <a href="search.php" class="search-btn" aria-label="search">
@@ -90,32 +93,17 @@ if (isset($_SESSION['email'])) {
         </ul>
         </li>
             
-        </ul>
-        </nav>
         <?php
         } else {
         ?>
-      <div class="wrapper">
-
-        <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
-          <span class="span one"></span>
-          <span class="span two"></span>
-          <span class="span three"></span>
-        </button>
-
         <a href="./loginpage.php" class="btn">Log in</a>
         <a href="./register.php" class="btn">Register</a>
-
-      </div>
         <?php
         }   
         ?>
+      </div>
     </div>
   </header>
-
-
-
-
 
   <!-- 
     - #SEARCH BAR
