@@ -64,9 +64,16 @@ if (isset($_SESSION['email'])) {
             <a href="index.php" class="navbar-link hover:underline" data-nav-link>Recent Post</a>
         </li>
 
-        <li class="navbar-item">
-            <a href="search.php" class="navbar-link hover:underline" data-nav-link>Search</a>
-        </li>
+        <div class="wrapper">
+                 <a href="search.php" class="search-btn" aria-label="search">
+                    <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+                    <span class="span">Search</span>
+                </a>
+                <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
+                    <span class="span one"></span>
+                    <span class="span two"></span>
+                    <span class="span three"></span>
+                </button>
 
         <?php
         if ($authenticated) {
