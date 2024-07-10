@@ -65,7 +65,7 @@ if (isset($_SESSION['email'])) {
         </li>
 
         <li class="navbar-item">
-            <a href="search.html" class="navbar-link hover:underline" data-nav-link>Search</a>
+            <a href="search.php" class="navbar-link hover:underline" data-nav-link>Search</a>
         </li>
 
         <?php
