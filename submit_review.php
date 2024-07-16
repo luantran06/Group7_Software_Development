@@ -1,6 +1,24 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+session_start();
+
+// Check if user is authenticated
+$authenticated = isset($_SESSION['email']);
+
+if (!$authenticated) {
+    // Redirect or handle unauthorized access
+    header("Location: login.php");
+    exit;
+}
+
+// Retrieve form data
+$reviewerFirstName = isset($_SESSION['first_name']) ? htmlspecialchars($_SESSION['first_name']) : '';
+$reviewerLastName = isset($_SESSION['last_name']) ? htmlspecialchars($_SESSION['last_name']) : '';
+$reviewText = isset($_POST['review_text']) ? $_POST['review_text'] : '';
+$rating = isset($_POST['rating']) ? intval($_POST['rating']) : 0;
+$restaurantId = isset($_POST['restaurant_id']) ? intval($_POST['restaurant_id']) : 0;
+
+// Combine first and last name into reviewer_name
+$reviewerName = trim($reviewerFirstName . ' ' . $reviewerLastName);
 
 // Database connection settings
 $servername = "localhost";
@@ -16,25 +34,46 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Retrieve form data
-$reviewer_name = $_POST['reviewer_name'];
-$review_text = $_POST['review_text'];
-$rating = intval($_POST['rating']);
-$restaurant_id = intval($_POST['restaurant_id']);
-
 // Insert new review into the database
-$insert_sql = "INSERT INTO reviews (reviewer_name, review_text, rating, restaurant_id) VALUES (?, ?, ?, ?)";
-$stmt = $conn->prepare($insert_sql);
-$stmt->bind_param("ssii", $reviewer_name, $review_text, $rating, $restaurant_id);
+$insertSql = "INSERT INTO reviews (reviewer_name, review_text, rating, restaurant_id) VALUES (?, ?, ?, ?)";
+$stmt = $conn->prepare($insertSql);
+$stmt->bind_param("ssii", $reviewerName, $reviewText, $rating, $restaurantId);
 
 if ($stmt->execute()) {
-    echo "New review added successfully!";
-    // Redirect back to the restaurant page or another appropriate page
-    header("Location: restaurant_page.php?id=" . $restaurant_id);
+    // Review added successfully, update restaurant rating
+    updateRestaurantRating($conn, $restaurantId);
+    header("Location: restaurant_page.php?id=" . $restaurantId);
 } else {
     echo "Error: " . $stmt->error;
 }
 
 $stmt->close();
 $conn->close();
+
+// Function to update restaurant rating
+function updateRestaurantRating($conn, $restaurantId) {
+    // Calculate new average rating
+    $avgRatingSql = "SELECT AVG(rating) AS avg_rating FROM reviews WHERE restaurant_id = ?";
+    $avgStmt = $conn->prepare($avgRatingSql);
+    $avgStmt->bind_param("i", $restaurantId);
+    $avgStmt->execute();
+    $result = $avgStmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $avgRating = $row['avg_rating'];
+
+        // Update restaurant table with new average rating
+        $updateSql = "UPDATE restaurants SET rating = ? WHERE id = ?";
+        $updateStmt = $conn->prepare($updateSql);
+        $updateStmt->bind_param("di", $avgRating, $restaurantId);
+        $updateStmt->execute();
+
+        // Close statements
+        $updateStmt->close();
+    }
+
+    // Close statement and connection
+    $avgStmt->close();
+}
 ?>
