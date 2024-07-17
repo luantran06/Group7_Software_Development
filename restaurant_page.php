@@ -304,23 +304,31 @@ body {
                     <span class="span two"></span>
                     <span class="span three"></span>
                 </button>
+
+        <?php
+        if ($authenticated) {
+        ?>
+
+        <li class="navbar-item dropdown">
+            <a href="#" class="navbar-link hover:underline" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <?= htmlspecialchars($_SESSION['first_name']) ?>
             </a>
-            <?php if ($authenticated): ?>
-                <li class="navbar-item dropdown">
-                    <a href="#" class="navbar-link hover:underline" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <?= htmlspecialchars($_SESSION['first_name']) ?>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a href="logout.php" class="dropdown-item" >Logout</a></li>
-                    </ul>
-                </li>
-            <?php else: ?>
-                <a href="loginpage.php" class="btn">Log in</a>
-                <a href="register.php" class="btn">Register</a>
-            <?php endif; ?>
-        </div>
+        <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a href="logout.php" class="dropdown-item" >Logout</a></li>
+        </ul>
+        </li>
+            
+        <?php
+        } else {
+        ?>
+        <a href="./loginpage.php" class="btn">Log in</a>
+        <a href="./register.php" class="btn">Register</a>
+        <?php
+        }   
+        ?>
+      </div>
     </div>
 </header>
 
