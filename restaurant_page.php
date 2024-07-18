@@ -269,19 +269,19 @@ body {
         <nav class="navbar">
             <ul class="navbar-list">
                 <li class="navbar-item"><a href="index.php" class="navbar-link">Home</a></li>
-                <li class="navbar-item"><a href="recent-post.php" class="navbar-link">Recent Post</a></li>
             </ul>
         </nav>
         <div class="wrapper">
-                 <a href="search.php" class="search-btn" aria-label="search">
-                    <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
-                    <span class="span">Search</span>
-                </a>
-                <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
-                    <span class="span one"></span>
-                    <span class="span two"></span>
-                    <span class="span three"></span>
-                </button>
+            <a href="search.php" class="search-btn" aria-label="search">
+                <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+                <span class="span">Search</span>
+            </a>
+            <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
+                <span class="span one"></span>
+                <span class="span two"></span>
+                <span class="span three"></span>
+            </button>
+
 
         <?php
         if ($authenticated) {
@@ -309,6 +309,9 @@ body {
       </div>
     </div>
 </header>
+<!-- Ionicons script -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 <!-- Header Image -->
 <div class="header">
@@ -450,6 +453,7 @@ body {
     </div>
 </div>
 <script>
+
 
 // Get the modal
 var modal = document.getElementById("add-review-modal");
