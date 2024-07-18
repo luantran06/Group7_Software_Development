@@ -287,7 +287,7 @@ if (isset($_SESSION['email'])) {
 
             <li class="scrollbar-item">
               <div class="blog-card">
-
+              <a href="restaurant_page.php">
                 <figure class="card-banner img-holder" style="--width: 500; --height: 600;">
                   <img src="./picture/boccalupo.jpg" width="500" height="600" loading="lazy"
                     alt="Perfection has to do with the end product" class="img-cover">
@@ -303,6 +303,7 @@ if (isset($_SESSION['email'])) {
 
                   </ul>
                 </figure>
+              
 
                 <div class="card-content">
 
@@ -333,7 +334,7 @@ if (isset($_SESSION['email'])) {
                   </p>
 
                 </div>
-
+                </a>
               </div>
             </li>
 
