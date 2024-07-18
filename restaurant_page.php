@@ -1,54 +1,40 @@
 <?php
-
 session_start();
 $authenticated = false;
 if (isset($_SESSION['email'])) {
     $authenticated = true;
 }
-
 // Assuming $_SESSION['first_name'] and $_SESSION['last_name'] are set after login
 $reviewerFirstName = isset($_SESSION['first_name']) ? htmlspecialchars($_SESSION['first_name']) : '';
 $reviewerLastName = isset($_SESSION['last_name']) ? htmlspecialchars($_SESSION['last_name']) : '';
 $reviewerEmail = isset($_SESSION['reviewer_email']) ? htmlspecialchars($_SESSION['reviewer_email']) : '';
-
-
-
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
 // Database connection settings
 $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "restaurant_info";
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $database);
-
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
 // Get restaurant ID from the query string
 $restaurant_id = isset($_GET['id']) ? intval($_GET['id']) : 3;
-
 // Fetch restaurant details, including rating
 $restaurant_sql = "SELECT name, website, rating FROM restaurants WHERE id = $restaurant_id";
 $restaurant_result = $conn->query($restaurant_sql);
 $restaurant = $restaurant_result->fetch_assoc();
-
 // Fetch header photo (always the first photo)
 $header_photo_sql = "SELECT url FROM photos WHERE restaurant_id = $restaurant_id ORDER BY id ASC LIMIT 1";
 $header_photo_result = $conn->query($header_photo_sql);
 $header_photo = $header_photo_result->fetch_assoc();
 $photo_url = isset($header_photo['url']) ? $header_photo['url'] : '';
-
 // Fetch photos
 $photos_sql = "SELECT url FROM photos WHERE restaurant_id = $restaurant_id AND id != 1";
 $photos_result = $conn->query($photos_sql);
-
 // Default photo URLs
 $photos = array();
 if ($photos_result->num_rows > 0) {
@@ -56,16 +42,11 @@ if ($photos_result->num_rows > 0) {
         $photos[] = $photo['url'];
     }
 }
-
-
 // Fetch reviews
 $reviews_sql = "SELECT reviewer_name, review_text, rating FROM reviews WHERE restaurant_id = $restaurant_id";
 $reviews_result = $conn->query($reviews_sql);
-
 $conn->close();
 ?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -130,6 +111,7 @@ body {
   background-color: #f0f0f0;
   padding: 20px;
   border-radius: 8px;
+  margin-right: 20px;
 }
 .reviews {
   flex: 0 0 50%; /* Reviews section takes up less space */
@@ -141,7 +123,6 @@ body {
   .container {
     flex-direction: column;
   }
-
   .about, .reviews {
     flex: 1 1 100%; /* Full width on smaller screens */
     margin-right: 0; /* Reset margin */
@@ -159,7 +140,6 @@ body {
   .container {
     flex-direction: column;
   }
-
   .about, .reviews {
     flex: 1 1 100%;
     margin-right: 0;
@@ -277,11 +257,9 @@ body {
     display: block; /* Prevent extra space below images */
     border-radius: 8px;
 }
-
 </style>
 </head>
 <body>
-
 <!-- Navbar (sit on top) -->
 <header class="header">
     <div class="container">
@@ -313,13 +291,13 @@ body {
             <a href="#" class="navbar-link hover:underline" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <?= htmlspecialchars($_SESSION['first_name']) ?>
             </a>
-        <ul class="dropdown-menu">
+            <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="profile.php">Profile</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a href="logout.php" class="dropdown-item" >Logout</a></li>
         </ul>
         </li>
-            
+
         <?php
         } else {
         ?>
@@ -332,12 +310,10 @@ body {
     </div>
 </header>
 
-
 <!-- Header Image -->
 <div class="header">
     <img src="<?php echo htmlspecialchars($photo_url); ?>" alt="<?php echo htmlspecialchars($restaurant['name']); ?>" class="header-img">
 </div>
-
 <!-- Restaurant Name and Rating -->
 <div class="header-text">
     <h1><?php echo htmlspecialchars($restaurant['name']); ?></h1>
@@ -348,7 +324,6 @@ body {
             $rating = floatval($restaurant['rating']); // Convert rating to float
             $full_stars = floor($rating); // Number of full stars
             $half_star = $rating - $full_stars; // Check if there's a half star
-
             // Loop to display stars
             for ($i = 1; $i <= 5; $i++) {
                 if ($i <= $full_stars) {
@@ -369,7 +344,6 @@ body {
         </div>
     </div>
 </div>
-
 <div class="container">
     <!-- Photos Section -->
     <div class="about">
@@ -386,7 +360,6 @@ body {
             <?php endif; ?>
         </div>
     </div>
-
     <!-- Reviews Section -->
     <div class="reviews">
         <div class="reviews-header">
@@ -433,13 +406,10 @@ body {
         <h3>Add Your Review</h3>
         <label for="reviewer_first_name">First Name:</label>
         <input type="text" id="reviewer_first_name" name="reviewer_first_name" value="<?php echo htmlspecialchars($reviewerFirstName); ?>" disabled>
-
         <label for="reviewer_last_name">Last Name:</label>
         <input type="text" id="reviewer_last_name" name="reviewer_last_name" value="<?php echo htmlspecialchars($reviewerLastName); ?>" disabled>
-
         <label for="review_text">Comment:</label>
         <textarea id="review_text" name="review_text" required></textarea>
-
         <label for="rating">Rating:</label>
         <select id="rating" name="rating" required>
             <option value="1">1</option>
@@ -448,26 +418,20 @@ body {
             <option value="4">4</option>
             <option value="5">5</option>
         </select>
-
         <input type="hidden" name="restaurant_id" value="<?php echo $restaurant_id; ?>">
         <button type="submit" class="button">Submit</button>
     </form>
-
     </div>
 </div>
-
 <script>
-
 document.getElementById('add-review-button').addEventListener('click', function() {
     var modal = document.getElementById('reviewModal');
     modal.style.display = 'block';
 });
-
 document.querySelector('.close').addEventListener('click', function() {
     var modal = document.getElementById('reviewModal');
     modal.style.display = 'none';
 });
-
 window.onclick = function(event) {
     var modal = document.getElementById('reviewModal');
     if (event.target == modal) {
