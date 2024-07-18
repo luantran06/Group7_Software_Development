@@ -263,7 +263,7 @@ body {
 <!-- Navbar (sit on top) -->
 <header class="header">
     <div class="container">
-        <a href="#" class="logo">
+        <a href="index.php" class="logo">
             <img src="./picture/logo.svg" width="100" height="40" alt="Tastebuds logo">
         </a>
         <nav class="navbar">
