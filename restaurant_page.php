@@ -5,8 +5,8 @@ if (isset($_SESSION['email'])) {
     $authenticated = true;
 }
 // Assuming $_SESSION['first_name'] and $_SESSION['last_name'] are set after login
-$reviewerFirstName = isset($_SESSION['first_name']) ? htmlspecialchars($_SESSION['first_name']) : '';
-$reviewerLastName = isset($_SESSION['last_name']) ? htmlspecialchars($_SESSION['last_name']) : '';
+// Assuming $_SESSION['first_name'] and $_SESSION['last_name'] are set after login
+$reviewerName = (isset($_SESSION['first_name']) && isset($_SESSION['last_name'])) ? htmlspecialchars($_SESSION['first_name']) . ' ' . htmlspecialchars($_SESSION['last_name']) : '';
 $reviewerEmail = isset($_SESSION['reviewer_email']) ? htmlspecialchars($_SESSION['reviewer_email']) : '';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -22,7 +22,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 // Get restaurant ID from the query string
-$restaurant_id = isset($_GET['id']) ? intval($_GET['id']) : 3;
+$restaurant_id = isset($_GET['id']) ? intval($_GET['id']) : 4;
 // Fetch restaurant details, including rating
 $restaurant_sql = "SELECT name, website, rating FROM restaurants WHERE id = $restaurant_id";
 $restaurant_result = $conn->query($restaurant_sql);
@@ -364,8 +364,11 @@ body {
     <div class="reviews">
         <div class="reviews-header">
             <h2>Reviews</h2>
-            <button class="button" id="add-review-button" style="background-color: #EE4D47; color: white;">Add Your Own</button>
+            <?php if ($authenticated): ?>
+                <button class="button" id="add-review-button" style="background-color: #EE4D47; color: white;">Add Your Own</button>
+            <?php endif; ?>
         </div>
+
         <?php if ($reviews_result->num_rows > 0): ?>
             <?php while ($review = $reviews_result->fetch_assoc()): ?>
                 <div class="review-card">
@@ -398,16 +401,39 @@ body {
         <?php endif; ?>
     </div>
 </div>
+<?php if ($authenticated): ?>
+    <div id="add-review-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="add-review-form" action="submit_review.php" method="POST">
+                <input type="hidden" name="restaurant_id" value="<?php echo $restaurant_id; ?>">
+                <label for="reviewer_name">Name:</label>
+                <input type="text" id="reviewer_name" name="reviewer_name" value="<?php echo $reviewerName; ?>" disabled>
+                <label for="review_text">Review</label>
+                <textarea id="review_text" name="review_text" required></textarea>
+                <label for="rating">Rating</label>
+                <select id="rating" name="rating" required>
+                    <option value="5">5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="2">2 Stars</option>
+                    <option value="1">1 Star</option>
+                </select>
+                <button type="submit">Submit Review</button>
+            </form>
+        </div>
+    </div>
+<?php endif; ?>
+
+
 <!-- The Modal -->
 <div id="reviewModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <form id="add-review-form" method="post" action="submit_review.php">
         <h3>Add Your Review</h3>
-        <label for="reviewer_first_name">First Name:</label>
-        <input type="text" id="reviewer_first_name" name="reviewer_first_name" value="<?php echo htmlspecialchars($reviewerFirstName); ?>" disabled>
-        <label for="reviewer_last_name">Last Name:</label>
-        <input type="text" id="reviewer_last_name" name="reviewer_last_name" value="<?php echo htmlspecialchars($reviewerLastName); ?>" disabled>
+        <label for="reviewer_name">Name:</label>
+        <input type="text" id="reviewer_name" name="reviewer_name" value="<?php echo htmlspecialchars($reviewerName); ?>" disabled>
         <label for="review_text">Comment:</label>
         <textarea id="review_text" name="review_text" required></textarea>
         <label for="rating">Rating:</label>
@@ -424,6 +450,33 @@ body {
     </div>
 </div>
 <script>
+
+// Get the modal
+var modal = document.getElementById("add-review-modal");
+// Get the button that opens the modal
+var btn = document.getElementById("add-review-button");
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+// When the user clicks the button, open the modal
+if (btn) {
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+}
+// When the user clicks on <span> (x), close the modal
+if (span) {
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
 document.getElementById('add-review-button').addEventListener('click', function() {
     var modal = document.getElementById('reviewModal');
     modal.style.display = 'block';
