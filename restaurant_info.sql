@@ -80,7 +80,7 @@ INSERT INTO `photos` (`id`, `restaurant_id`, `url`) VALUES
 (38, 13, 'https://images.squarespace-cdn.com/content/v1/6483544bed15ed69dc9e87e5/0d0672e4-9232-4ca3-85c5-f2224b65b2f4/Bilbo_Atlanta_D_ANMV2opt.gif?format=1500w'),
 (39, 13, 'https://images.squarespace-cdn.com/content/v1/6483544bed15ed69dc9e87e5/23e2c27a-c26c-44e7-ab9b-fc86575a9670/Le+Bilboquet+Atlanta+2023+%2829%29.jpg?format=500w'),
 (40, 14, 'https://bistroniko.com/wp-content/uploads/2022/10/Bistro-Niko-Mussels-Gilbert.jpg'),
-(41, 14, 'https://buckheadrestaurants.com/wp-content/uploads/2022/12/bistro-niko-beef-cheeks.jpg.jpg'),
+(41, 14, 'https://foodiebuddha.com/wp-content/uploads/2009/11/bistronikopressshot_thumb.jpg'),
 (42, 15, 'https://s26269.pcdn.co/wp-content/uploads/2023/07/TheAlden-1.png'),
 (43, 15, 'https://s26269.pcdn.co/wp-content/uploads/2023/07/Lunar-Chocolate-Close-1536x1024.jpg'),
 (44, 16, 'https://images.squarespace-cdn.com/content/v1/651199578bfa4f0119468845/993ebac2-1aba-4e81-801d-b6269a56e132/01.18.24-lagrotta-final-0037.jpeg?format=750w'),
@@ -157,14 +157,65 @@ INSERT INTO `reviews` (`id`, `restaurant_id`, `reviewer_name`, `review_text`, `r
 (7, 3, 'John Doe', 'Limited menu', 2),
 (19, 4, 'Accounta Lastname', 'Loved it!', 5);
 
+-- Indexes for dumped tables
+
+--
+-- Indexes for table `photos`
+--
+ALTER TABLE `photos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `restaurant_id` (`restaurant_id`);
+
+--
+-- Indexes for table `restaurants`
+--
+ALTER TABLE `restaurants`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `restaurant_id` (`restaurant_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `photos`
+--
+ALTER TABLE `photos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT for table `restaurants`
+--
+ALTER TABLE `restaurants`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
 -- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `photos`
 --
 ALTER TABLE `photos`
   ADD CONSTRAINT `photos_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
 
+--
+-- Constraints for table `reviews`
+--
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
