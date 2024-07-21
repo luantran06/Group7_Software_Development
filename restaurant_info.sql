@@ -30,7 +30,9 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `photos` (
   `id` int(11) NOT NULL,
   `restaurant_id` int(11) NOT NULL,
-  `url` varchar(255) NOT NULL
+  `url` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `restaurant_id` (`restaurant_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -86,7 +88,20 @@ INSERT INTO `restaurants` (`id`, `name`, `website`, `rating`, `category`) VALUES
 (2, 'Gunshow', 'http://www.gunshowatl.com/', NULL, 'American'),
 (3, 'Taqueria Del Sol', 'http://www.taqueriadelsol.com', 3.5714, 'Mexican'),
 (4, 'BoccaLupo', 'http://boccalupoatl.com/', 5, 'Italian'),
-(5, 'Umi', 'https://umiatlanta.com/', NULL, 'Japanese');
+(5, 'Umi', 'https://umiatlanta.com/', NULL, 'Japanese'),
+(6, 'Lazy Betty', 'https://lazybettyatl.com/', NULL, 'American'),
+(7, 'Bones', 'http://www.bonesrestaurant.com/', NULL, 'Steakhouse'),
+(8, 'Aria', 'http://www.aria-atl.com/', NULL, 'American'),
+(9, 'chastain', 'https://www.thechastainatl.com/', NULL, 'American'),
+(10, 'Tiny Lou', 'https://tinylous.com/', NULL, 'French'),
+(11, 'The Select', 'https://theselectatl.com/', NULL, 'American'),
+(12, 'Yebo Beach Haus', 'https://www.yebobeachhaus.com/', NULL, 'Seafood'),
+(13, 'Le Bilboquet', 'http://www.lebilboquetatlanta.com/', NULL, 'French'),
+(14, 'Bistro Niko', 'http://www.buckheadrestaurants.com/bistro-niko/', NULL, 'French'),
+(15, 'The Alden', 'https://www.thealdenrestaurant.com/', NULL, 'American'),
+(16, 'La Grotta', 'https://lagrottaatlanta.com/', NULL, 'Italian'),
+(17, 'St. Cecilia', 'https://stceciliaatl.com/', NULL, 'Italian'),
+(18, 'Ruby Chow', 'https://rubychowsatl.com/', NULL, 'Asian');
 
 -- --------------------------------------------------------
 
@@ -115,50 +130,6 @@ INSERT INTO `reviews` (`id`, `restaurant_id`, `reviewer_name`, `review_text`, `r
 (6, 3, 'Jack John', 'Great Time!', 5),
 (7, 3, 'John Doe', 'Limited menu', 2),
 (19, 4, 'Accounta Lastname', 'Loved it!', 5);
-
--- Indexes for dumped tables
-
---
--- Indexes for table `photos`
---
-ALTER TABLE `photos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `restaurant_id` (`restaurant_id`);
-
---
--- Indexes for table `restaurants`
---
-ALTER TABLE `restaurants`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `reviews`
---
-ALTER TABLE `reviews`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `restaurant_id` (`restaurant_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `photos`
---
-ALTER TABLE `photos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
---
--- AUTO_INCREMENT for table `restaurants`
---
-ALTER TABLE `restaurants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `reviews`
---
-ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
