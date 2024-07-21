@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `photos`
 --
 
-CREATE TABLE `photos` (
+CREATE TABLE IF NOT EXISTS `photos` (
   `id` int(11) NOT NULL,
   `restaurant_id` int(11) NOT NULL,
   `url` varchar(255) NOT NULL
@@ -68,12 +68,13 @@ INSERT INTO `photos` (`id`, `restaurant_id`, `url`) VALUES
 -- Table structure for table `restaurants`
 --
 
-CREATE TABLE `restaurants` (
+CREATE TABLE IF NOT EXISTS `restaurants` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `website` varchar(255) DEFAULT NULL,
   `rating` float DEFAULT NULL,
-  `category` varchar(50) DEFAULT NULL
+  `category` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -93,12 +94,14 @@ INSERT INTO `restaurants` (`id`, `name`, `website`, `rating`, `category`) VALUES
 -- Table structure for table `reviews`
 --
 
-CREATE TABLE `reviews` (
+CREATE TABLE IF NOT EXISTS `reviews` (
   `id` int(11) NOT NULL,
   `restaurant_id` int(11) NOT NULL,
   `reviewer_name` varchar(255) NOT NULL,
   `review_text` text NOT NULL,
-  `rating` int(11) DEFAULT NULL
+  `rating` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `restaurant_id` (`restaurant_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -113,9 +116,7 @@ INSERT INTO `reviews` (`id`, `restaurant_id`, `reviewer_name`, `review_text`, `r
 (7, 3, 'John Doe', 'Limited menu', 2),
 (19, 4, 'Accounta Lastname', 'Loved it!', 5);
 
---
 -- Indexes for dumped tables
---
 
 --
 -- Indexes for table `photos`
