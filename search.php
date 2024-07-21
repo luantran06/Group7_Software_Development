@@ -82,7 +82,7 @@ $conn->close();
         <div class="container">
             <h2 class="h2 section-title">Search for Restaurants</h2>
             <form id="searchForm" class="search-form" method="GET" action="search.php">
-                <input type="text" id="searchInput" name="search" placeholder="e.g. Lazy Betty, Gunshow" class="search-field">
+                <input type="text" id="searchInput" name="search" placeholder="e.g. Gunshow" class="search-field">
                 <button type="submit" class="btn">Search</button>
             </form>
         </div>
