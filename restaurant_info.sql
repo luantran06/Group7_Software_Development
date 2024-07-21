@@ -62,7 +62,33 @@ INSERT INTO `photos` (`id`, `restaurant_id`, `url`) VALUES
 (20, 5, 'https://umiatlanta.com/wp-content/uploads/2013/07/IMG_1501-1.jpg'),
 (21, 5, 'https://culturated.com/wp-content/uploads/2015/03/Umi_Sushi_Atlanta_Fuyuhiko_Ito-1050x700.jpg'),
 (22, 5, 'https://culturated.com/wp-content/uploads/2015/03/Umi_Sushi_Atlanta.jpg'),
-(23, 5, 'https://umiatlanta.com/wp-content/uploads/2013/07/IMG_0199-1.jpg');
+(23, 5, 'https://umiatlanta.com/wp-content/uploads/2013/07/IMG_0199-1.jpg'),
+(24, 6, 'https://static.wixstatic.com/media/0337ff_af47d9938fe64aa4abbd46cf346c272a~mv2.jpg/v1/fill/w_638,h_929,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/0337ff_af47d9938fe64aa4abbd46cf346c272a~mv2.jpg'),
+(25, 6, 'https://images.squarespace-cdn.com/content/v1/5a9b049f75f9eef8f485a56e/1561141646776-EF7KJJ5EMUK1LFV0RN71/1.png'),
+(26, 7, 'https://bonesrestaurant.com/wp-content/uploads/2019/02/reservation_650_280.jpg'),
+(27, 7, 'https://bonesrestaurant.com/wp-content/uploads/2019/02/bones-wine-shot.jpg'),
+(28, 8, 'https://images.squarespace-cdn.com/content/v1/53d6cfc4e4b08c041922de0d/1512146276758-JP9NW7MIYVTPWDRAYS60/aria-9952sqsm.jpg?format=1500w'),
+(29, 8, 'https://images.squarespace-cdn.com/content/v1/53d6cfc4e4b08c041922de0d/1500431603141-B2470TNAVID2ARU6T44O/Produce_Colors-11.png?format=1500w'),
+(30, 9, 'https://thechastainatl.com/wp-content/uploads/2024/03/menu-1.jpg'),
+(31, 9, 'https://thechastainatl.com/wp-content/uploads/2024/03/web4.jpg'),
+(32, 10, 'https://images.squarespace-cdn.com/content/v1/6063293cd736ea44f69b9f60/4a4fc8f5-975b-4053-9946-ee28d41d9376/Tiny+Lou%27s+2.jpg?format=500w'),
+(33, 10, 'https://images.squarespace-cdn.com/content/v1/6063293cd736ea44f69b9f60/1690999431604-MCF4C02EEUYNZO10HPA5/Tiny%2BLou%2527s%2B1.jpg?format=750w'),
+(34, 11, 'https://popmenucloud.com/cdn-cgi/image/width%3D412%2Cheight%3D412%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/qegjhdml/307ed457-9ead-48cf-9a4c-54434770c746.jpg'),
+(35, 11, 'https://popmenucloud.com/cdn-cgi/image/width%3D412%2Cheight%3D412%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/qegjhdml/53de075f-ce88-4945-800a-6467f77c3342.jpg'),
+(36, 12, 'https://yebobeachhaus.com/wp-content/uploads/2021/11/6AE6EF79-18A9-4E8B-A8CE-537EFEC85C27-scaled.jpg'),
+(37, 12, 'https://yebobeachhaus.com/wp-content/uploads/2023/01/Tezza-9968.jpg'),
+(38, 13, 'https://images.squarespace-cdn.com/content/v1/6483544bed15ed69dc9e87e5/0d0672e4-9232-4ca3-85c5-f2224b65b2f4/Bilbo_Atlanta_D_ANMV2opt.gif?format=1500w'),
+(39, 13, 'https://images.squarespace-cdn.com/content/v1/6483544bed15ed69dc9e87e5/23e2c27a-c26c-44e7-ab9b-fc86575a9670/Le+Bilboquet+Atlanta+2023+%2829%29.jpg?format=500w'),
+(40, 14, 'https://bistroniko.com/wp-content/uploads/2022/10/Bistro-Niko-Mussels-Gilbert.jpg'),
+(41, 14, 'https://buckheadrestaurants.com/wp-content/uploads/2022/12/bistro-niko-beef-cheeks.jpg.jpg'),
+(42, 15, 'https://s26269.pcdn.co/wp-content/uploads/2023/07/TheAlden-1.png'),
+(43, 15, 'https://s26269.pcdn.co/wp-content/uploads/2023/07/Lunar-Chocolate-Close-1536x1024.jpg'),
+(44, 16, 'https://images.squarespace-cdn.com/content/v1/651199578bfa4f0119468845/993ebac2-1aba-4e81-801d-b6269a56e132/01.18.24-lagrotta-final-0037.jpeg?format=750w'),
+(45, 16, 'https://images.squarespace-cdn.com/content/v1/651199578bfa4f0119468845/961d600d-942c-4f11-af12-73ace3d6ebd9/01.18.24-lagrotta-final-0024.jpeg?format=750w'),
+(46, 17, 'https://stceciliaatl.com/wp-content/themes/st-cecilia/assets/images/st-cecilia-logo.png'),
+(47, 17, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXYJTbMzqbhZxo-McyhnR9j7XX_BaKBKtjcQ&s'),
+(48, 18, 'https://popmenucloud.com/qrajlvcb/09b22dbc-7ad2-4c70-948c-2f280875f1ff.png'),
+(49, 18, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQAgpqgc2bgKmyOoxxA-dSj-hQoqPo83bW4A&s');
 
 -- --------------------------------------------------------
 
@@ -97,7 +123,7 @@ INSERT INTO `restaurants` (`id`, `name`, `website`, `rating`, `category`) VALUES
 (11, 'The Select', 'https://theselectatl.com/', NULL, 'American'),
 (12, 'Yebo Beach Haus', 'https://www.yebobeachhaus.com/', NULL, 'Seafood'),
 (13, 'Le Bilboquet', 'http://www.lebilboquetatlanta.com/', NULL, 'French'),
-(14, 'Bistro Niko', 'http://www.buckheadrestaurants.com/bistro-niko/', NULL, 'French'),
+(14, 'Bistro Niko', 'https://bistroniko.com/', NULL, 'French'),
 (15, 'The Alden', 'https://www.thealdenrestaurant.com/', NULL, 'American'),
 (16, 'La Grotta', 'https://lagrottaatlanta.com/', NULL, 'Italian'),
 (17, 'St. Cecilia', 'https://stceciliaatl.com/', NULL, 'Italian'),
@@ -131,21 +157,14 @@ INSERT INTO `reviews` (`id`, `restaurant_id`, `reviewer_name`, `review_text`, `r
 (7, 3, 'John Doe', 'Limited menu', 2),
 (19, 4, 'Accounta Lastname', 'Loved it!', 5);
 
---
 -- Constraints for dumped tables
---
-
---
--- Constraints for table `photos`
 --
 ALTER TABLE `photos`
   ADD CONSTRAINT `photos_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
 
---
--- Constraints for table `reviews`
---
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
