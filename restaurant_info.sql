@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2024 at 06:13 AM
+-- Generation Time: Jul 22, 2024 at 07:36 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -27,12 +27,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `photos`
 --
 
-CREATE TABLE IF NOT EXISTS `photos` (
+CREATE TABLE `photos` (
   `id` int(11) NOT NULL,
   `restaurant_id` int(11) NOT NULL,
-  `url` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `restaurant_id` (`restaurant_id`)
+  `url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -96,13 +94,12 @@ INSERT INTO `photos` (`id`, `restaurant_id`, `url`) VALUES
 -- Table structure for table `restaurants`
 --
 
-CREATE TABLE IF NOT EXISTS `restaurants` (
+CREATE TABLE `restaurants` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `website` varchar(255) DEFAULT NULL,
   `rating` float DEFAULT NULL,
-  `category` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `category` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -110,14 +107,14 @@ CREATE TABLE IF NOT EXISTS `restaurants` (
 --
 
 INSERT INTO `restaurants` (`id`, `name`, `website`, `rating`, `category`) VALUES
-(1, 'Chai Yo Modern Thai', 'https://www.chaiyoatl.com/', NULL, 'Asian'),
-(2, 'Gunshow', 'http://www.gunshowatl.com/', NULL, 'American'),
-(3, 'Taqueria Del Sol', 'http://www.taqueriadelsol.com', 3.5714, 'Mexican'),
-(4, 'BoccaLupo', 'http://boccalupoatl.com/', 5, 'Italian'),
-(5, 'Umi', 'https://umiatlanta.com/', NULL, 'Japanese'),
-(6, 'Lazy Betty', 'https://lazybettyatl.com/', NULL, 'American'),
+(1, 'Chai Yo Modern Thai', 'https://www.chaiyoatl.com/', 4, 'Asian'),
+(2, 'Gunshow', 'http://www.gunshowatl.com/', 4.5, 'American'),
+(3, 'Taqueria Del Sol', 'http://www.taqueriadelsol.com', 3, 'Mexican'),
+(4, 'BoccaLupo', 'http://boccalupoatl.com/', 4.5, 'Italian'),
+(5, 'Umi', 'https://umiatlanta.com/', 5, 'Japanese'),
+(6, 'Lazy Betty', 'https://lazybettyatl.com/', 4, 'American'),
 (7, 'Bones', 'http://www.bonesrestaurant.com/', NULL, 'Steakhouse'),
-(8, 'Aria', 'http://www.aria-atl.com/', NULL, 'American'),
+(8, 'Aria', 'http://www.aria-atl.com/', 4, 'American'),
 (9, 'chastain', 'https://www.thechastainatl.com/', NULL, 'American'),
 (10, 'Tiny Lou', 'https://tinylous.com/', NULL, 'French'),
 (11, 'The Select', 'https://theselectatl.com/', NULL, 'American'),
@@ -135,29 +132,34 @@ INSERT INTO `restaurants` (`id`, `name`, `website`, `rating`, `category`) VALUES
 -- Table structure for table `reviews`
 --
 
-CREATE TABLE IF NOT EXISTS `reviews` (
+CREATE TABLE `reviews` (
   `id` int(11) NOT NULL,
   `restaurant_id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `reviewer_name` varchar(255) NOT NULL,
   `review_text` text NOT NULL,
-  `rating` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `restaurant_id` (`restaurant_id`)
+  `rating` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `reviews`
 --
 
-INSERT INTO `reviews` (`id`, `restaurant_id`, `reviewer_name`, `review_text`, `rating`) VALUES
-(1, 3, 'Jane Doe', 'Great food. A bit crowded.', 3),
-(2, 3, 'John Smith', 'Great food!', 5),
-(3, 3, 'Alice Brown', 'Loved the ambiance and the dishes were delicious. Could expand menu more. ', 4),
-(6, 3, 'Jack John', 'Great Time!', 5),
-(7, 3, 'John Doe', 'Limited menu', 2),
-(19, 4, 'Accounta Lastname', 'Loved it!', 5);
+INSERT INTO `reviews` (`id`, `restaurant_id`, `email`, `reviewer_name`, `review_text`, `rating`) VALUES
+(1, 1, 'janesmith@email.com', 'Jane Smith', 'Great service!', 5),
+(2, 4, 'janesmith@email.com', 'Jane Smith', 'Great service!', 4),
+(3, 3, 'janesmith@email.com', 'Jane Smith', 'Limited menu...', 3),
+(4, 5, 'janesmith@email.com', 'Jane Smith', 'Upscale ambience and great food.', 5),
+(5, 2, 'janesmith@email.com', 'Jane Smith', 'My husband enjoyed this place.', 4),
+(6, 6, 'janesmith@email.com', 'Jane Smith', 'Had a great brunch here!', 4),
+(8, 2, 'johnsmith@email.com', 'John Smith', 'Loved eating here.', 5),
+(9, 4, 'johnsmith@email.com', 'John Smith', 'Italian food is awesome. This place did amazing.', 5),
+(10, 1, 'johnsmith@email.com', 'John Smith', 'A bit too loud indoors on a Sunday, but food was great.', 3),
+(11, 8, 'johnsmith@email.com', 'John Smith', 'Loved the antipasti.', 4);
 
+--
 -- Indexes for dumped tables
+--
 
 --
 -- Indexes for table `photos`
@@ -184,32 +186,14 @@ ALTER TABLE `reviews`
 --
 
 --
--- AUTO_INCREMENT for table `photos`
---
-ALTER TABLE `photos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
-
---
--- AUTO_INCREMENT for table `restaurants`
---
-ALTER TABLE `restaurants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `photos`
---
-ALTER TABLE `photos`
-  ADD CONSTRAINT `photos_ibfk_1` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
 
 --
 -- Constraints for table `reviews`
