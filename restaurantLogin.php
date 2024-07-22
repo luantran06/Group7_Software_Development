@@ -56,11 +56,11 @@ if ($_SERVER['REQUEST_METHOD'] =='POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Business Login</title>
     <link rel="stylesheet" href="loginstyle/style2.css">
 </head>
 <header>
-    <h1>Log In</h1>
+    <h1>Business Log In</h1>
         <a href="index.php" class="logo">
             <img src=".\picture\logo.svg" width="100" height="40" alt="Tastebuds logo">
         </a>
@@ -77,7 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] =='POST') {
             </div>
         
         <?php } ?>
-
         <form  method="post">
             <div class="form-group">
                 <label for="username">Email:</label>
@@ -90,8 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] =='POST') {
             <button type="submit" class="btn">Login</button>
             <a href="./index.php" class="btn btn-outline-primary">Cancel</a>
         </form>
-        <p>Don't have an account? <a href="register.php">Sign up</a></p>
-        <p><a href="restaurantLogin.php">Login as Business Owner</a></p>
+        <p>Don't have an account? <a href="restaurantRegister.php">Claim your business</a></p>
+        <p><a href="loginpage.php">Login as User</a></p>
     </div>
 </div>
 </body>

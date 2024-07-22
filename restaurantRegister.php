@@ -11,14 +11,12 @@ if (isset($_SESSION['email'])) {
 }
 
 
-$first_name ="";
-$last_name ="";
+$business_name ="";
 $email ="";
 $phone ="";
 $address ="";
 
-$first_name_error ="";
-$last_name_error ="";
+$business_name_error ="";
 $email_error ="";
 $phone_error="";
 $address_error = "";
@@ -28,8 +26,7 @@ $confirm_password_error ="";
 $error = false;
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
+    $business_name = $_POST['last_name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $address = $_POST['address'];
@@ -37,14 +34,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $confirm_password = $_POST['confirm_password'];
 
 
-    if(empty($first_name)){
-        $first_name_error = "First name is required";
+    if(empty($business_name)){
+        $business_name_error = "Business name is required";
         $error = true;
     }
-    if(empty($last_name)){
-        $last_name_error = "Last name is required";
-        $error = true;
-    }
+
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $email_error = "Email is required";
         $error = true;
@@ -88,8 +82,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
         $_SESSION['user_id'] = $insert_id;
-        $_SESSION['first_name'] = $first_name;
-        $_SESSION['last_name'] = $last_name;
+        $_SESSION['business_name'] = $business_name;
         $_SESSION['email'] = $email;
         $_SESSION['phone'] = $phone;
         $_SESSION['address'] = $address;
@@ -97,10 +90,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         header("Location: index.php");
         exit;        
     } 
-        
-}
 
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,7 +103,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <link rel="stylesheet" href="loginstyle/style1.css">
 </head>
 <header>
-    <h1>Sign Up</h1>
+    <h1>Create a Business Account</h1>
         <a href="index.php" class="logo">
             <img src=".\picture\logo.svg" width="100" height="40" alt="Tastebuds logo">
         </a>
@@ -122,16 +115,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <!--action="signup_process.php"-->
         <form  method="post">
             <div class="form-group">
-                <label for="first_name">First name:</label>
-                <input type="text" id="first_name" name="first_name" value="<?= $first_name ?>" required>
-                <span class="text-danger"><?= $first_name_error ?></span>
+                <label for="business_name">Business name:</label>
+                <input type="text" id="business_name" name="business_name" value="<?= $business_name ?>" required>
+                <span class="text-danger"><?= $business_name_error ?></span>
             </div>
 
-            <div class="form-group">
-                <label for="username">Last name:</label>
-                <input type="text" id="last_name" name="last_name" value="<?= $last_name ?>" required>
-                <span class="text-danger"><?= $last_name_error ?></span>
-            </div>
             <div class="form-group">
                 <label for="username">Email:</label>
                 <input type="text" id="email" name="email" value="<?= $email ?>" required>
@@ -145,7 +133,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             </div>
 
             <div class="form-group">
-                <label for="username">Address:</label>
+                <label for="username">Business Address:</label>
                 <input type="text" id="address" name="address" value="<?= $address ?>" required>
                 <span class="text-danger"><?= $address_error ?></span>
             </div>
@@ -159,14 +147,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <input type="password" id="confirm_password" name="confirm_password" required>
                 <span class="text-danger"><?= $confirm_password_error ?></span>
             </div>
-            
+
                     <div class="col-sm-4 d-grid">
                         <button type="submit" class="btn">Sign Up</button>
                         <a href="./index.php" class="btn btn-outline-primary">Cancel</a>
                     </div>
         </form>
-        <p>Already have an account? <a href="loginpage.php">Log in</a></p>
-        <p><a href="restaurantRegister.php">Create a Business Account</a></p>
+        <p>Already have an account? <a href="restaurantLogin.php">Log in</a></p>
+        <p><a href="register.php">Create a Personal Account</a></p>
     </div>
 </div>
 </body>
