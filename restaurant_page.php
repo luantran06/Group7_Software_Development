@@ -130,12 +130,20 @@ body {
   }
 }
 .review-card {
-  margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #fff;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between; /* Align items to the sides */
+    align-items: center; /* Center items vertically */
 }
+.delete-button-container {
+    display: flex;
+    align-items: center;
+}
+
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -375,36 +383,41 @@ body {
         <?php if ($reviews_result->num_rows > 0): ?>
             <?php while ($review = $reviews_result->fetch_assoc()): ?>
                 <div class="review-card">
-                    <h3><?php echo htmlspecialchars($review['reviewer_name']); ?></h3>
-                    <div class="rating">
-                    <span class="rating-number"><?php echo htmlspecialchars($review['rating']); ?></span>
-                    <?php
-                        $rating = floatval($review['rating']); // Convert rating to float
-                        $full_stars = floor($rating); // Number of full stars
-                        $half_star = $rating - $full_stars; // Check if there's a half star
-                        
-                        // Loop to display stars
-                        for ($i = 1; $i <= 5; $i++) {
-                            if ($i <= $full_stars) {
-                                echo '<img src="assets/vectors/star-filled.png" alt="Star filled" class="star">';
-                            } else if ($i == ceil($rating) && $half_star >= 0.5) {
-                                echo '<img src="assets/vectors/star-half.png" alt="Half filled star" class="star">';
-                            } else {
-                                echo '<img src="assets/vectors/star-empty.png" alt="Empty star" class="star">';
-                            }
-                        }
-                    ?>
+                    <div class="review-content">
+                        <h3><?php echo htmlspecialchars($review['reviewer_name']); ?></h3>
+                        <div class="rating">
+                            <span class="rating-number"><?php echo htmlspecialchars($review['rating']); ?></span>
+                            <?php
+                                $rating = floatval($review['rating']); // Convert rating to float
+                                $full_stars = floor($rating); // Number of full stars
+                                $half_star = $rating - $full_stars; // Check if there's a half star
+                                
+                                // Loop to display stars
+                                for ($i = 1; $i <= 5; $i++) {
+                                    if ($i <= $full_stars) {
+                                        echo '<img src="assets/vectors/star-filled.png" alt="Star filled" class="star">';
+                                    } else if ($i == ceil($rating) && $half_star >= 0.5) {
+                                        echo '<img src="assets/vectors/star-half.png" alt="Half filled star" class="star">';
+                                    } else {
+                                        echo '<img src="assets/vectors/star-empty.png" alt="Empty star" class="star">';
+                                    }
+                                }
+                            ?>
+                        </div>
+                        <p><?php echo htmlspecialchars($review['review_text']); ?></p>
                     </div>
-                    <p><?php echo htmlspecialchars($review['review_text']); ?></p>
                     <?php if ($authenticated && $review['email'] === $reviewerEmail): ?>
-                        <form action="delete_review.php" method="post" style="display: inline;">
-                            <input type="hidden" name="review_id" value="<?php echo htmlspecialchars($review['id']); ?>">
-                            <input type="hidden" name="restaurant_id" value="<?php echo htmlspecialchars($restaurant_id); ?>">
-                            <button type="submit" class="button" style="background-color: #E64042; color: white;">Delete</button>
-                        </form>
+                        <div class="delete-button-container">
+                            <form action="delete_review.php" method="post" style="display: inline;">
+                                <input type="hidden" name="review_id" value="<?php echo htmlspecialchars($review['id']); ?>">
+                                <input type="hidden" name="restaurant_id" value="<?php echo htmlspecialchars($restaurant_id); ?>">
+                                <button type="submit" class="button" style="background-color: #E64042; color: white;">Delete</button>
+                            </form>
+                        </div>
                     <?php endif; ?>
                 </div>
             <?php endwhile; ?>
+
         <?php else: ?>
             <p>No reviews yet.</p>
         <?php endif; ?>
