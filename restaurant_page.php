@@ -1,52 +1,118 @@
 <?php
 session_start();
 $authenticated = false;
+$isAdmin = false;
+
 if (isset($_SESSION['email'])) {
     $authenticated = true;
+    
+    // Database connection settings
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "users"; // Database for user info
+    
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $database);
+    
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
+    // Get the logged-in user's email
+    $userEmail = $_SESSION['email'];
+    
+    // Fetch is_admin status from users table
+    $admin_sql = "SELECT is_admin FROM users WHERE email = ?";
+    if ($stmt = $conn->prepare($admin_sql)) {
+        $stmt->bind_param('s', $userEmail);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+            $isAdmin = $user['is_admin'] == 1;
+        }
+        $stmt->close();
+    } else {
+        // Prepare failed, display error
+        echo "Error preparing statement: " . $conn->error;
+    }
+    
+    $conn->close();
 }
-// Assuming $_SESSION['first_name'] and $_SESSION['last_name'] are set after login
-// Assuming $_SESSION['first_name'] and $_SESSION['last_name'] are set after login
-$reviewerName = (isset($_SESSION['first_name']) && isset($_SESSION['last_name'])) ? htmlspecialchars($_SESSION['first_name']) . ' ' . htmlspecialchars($_SESSION['last_name']) : '';
-$reviewerEmail = isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '';
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-// Database connection settings
+
+// Get restaurant ID from the query string
+$restaurant_id = isset($_GET['id']) ? intval($_GET['id']) : 4;
+
+// Database connection settings for restaurant data
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "restaurant_info";
+$database = "restaurant_info"; // Database for restaurant information
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $database);
+
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-// Get restaurant ID from the query string
-$restaurant_id = isset($_GET['id']) ? intval($_GET['id']) : 4;
 // Fetch restaurant details, including rating
-$restaurant_sql = "SELECT name, website, rating FROM restaurants WHERE id = $restaurant_id";
-$restaurant_result = $conn->query($restaurant_sql);
-$restaurant = $restaurant_result->fetch_assoc();
+$restaurant_sql = "SELECT name, website, rating FROM restaurants WHERE id = ?";
+if ($stmt = $conn->prepare($restaurant_sql)) {
+    $stmt->bind_param('i', $restaurant_id);
+    $stmt->execute();
+    $restaurant_result = $stmt->get_result();
+    $restaurant = $restaurant_result->fetch_assoc();
+    $stmt->close();
+} else {
+    echo "Error preparing statement: " . $conn->error;
+}
+$reviewerEmail = $_SESSION['email'];
+
 // Fetch header photo (always the first photo)
-$header_photo_sql = "SELECT url FROM photos WHERE restaurant_id = $restaurant_id ORDER BY id ASC LIMIT 1";
-$header_photo_result = $conn->query($header_photo_sql);
-$header_photo = $header_photo_result->fetch_assoc();
-$photo_url = isset($header_photo['url']) ? $header_photo['url'] : '';
+$header_photo_sql = "SELECT url FROM photos WHERE restaurant_id = ? ORDER BY id ASC LIMIT 1";
+if ($stmt = $conn->prepare($header_photo_sql)) {
+    $stmt->bind_param('i', $restaurant_id);
+    $stmt->execute();
+    $header_photo_result = $stmt->get_result();
+    $header_photo = $header_photo_result->fetch_assoc();
+    $photo_url = isset($header_photo['url']) ? $header_photo['url'] : '';
+    $stmt->close();
+} else {
+    echo "Error preparing statement: " . $conn->error;
+}
+
 // Fetch photos
-$photos_sql = "SELECT url FROM photos WHERE restaurant_id = $restaurant_id AND id != 1";
-$photos_result = $conn->query($photos_sql);
-// Default photo URLs
-$photos = array();
-if ($photos_result->num_rows > 0) {
+$photos_sql = "SELECT url FROM photos WHERE restaurant_id = ? AND id != 1";
+if ($stmt = $conn->prepare($photos_sql)) {
+    $stmt->bind_param('i', $restaurant_id);
+    $stmt->execute();
+    $photos_result = $stmt->get_result();
+    $photos = array();
     while ($photo = $photos_result->fetch_assoc()) {
         $photos[] = $photo['url'];
     }
+    $stmt->close();
+} else {
+    echo "Error preparing statement: " . $conn->error;
 }
+
 // Fetch reviews
-$reviews_sql = "SELECT id, reviewer_name, review_text, rating, email FROM reviews WHERE restaurant_id = $restaurant_id";
-$reviews_result = $conn->query($reviews_sql);
+$reviews_sql = "SELECT id, reviewer_name, review_text, rating, email FROM reviews WHERE restaurant_id = ?";
+if ($stmt = $conn->prepare($reviews_sql)) {
+    $stmt->bind_param('i', $restaurant_id);
+    $stmt->execute();
+    $reviews_result = $stmt->get_result();
+    $stmt->close();
+} else {
+    echo "Error preparing statement: " . $conn->error;
+}
+
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -461,7 +527,7 @@ body {
                         </div>
                         <p><?php echo htmlspecialchars($review['review_text']); ?></p>
                     </div>
-                    <?php if ($authenticated && $review['email'] === $reviewerEmail): ?>
+                    <?php if ($authenticated && ($review['email'] === $reviewerEmail || $isAdmin)): ?>
                         <div class="delete-button-container">
                             <form action="delete_review.php" method="post" style="display: inline;">
                                 <input type="hidden" name="review_id" value="<?php echo htmlspecialchars($review['id']); ?>">
