@@ -422,7 +422,7 @@ body {
             <p>No reviews yet.</p>
         <?php endif; ?>
     </div>
-
+</div>
 
 <!-- The Modal -->
 <div id="reviewModal" class="modal">
@@ -444,9 +444,12 @@ body {
         </select>
         <input type="hidden" name="restaurant_id" value="<?php echo $restaurant_id; ?>">
         <button type="submit" class="button">Submit</button>
-    </form>
+        </form>
+  
     </div>
+    
 </div>
+
 <script>
 
 
@@ -491,5 +494,9 @@ window.onclick = function(event) {
     }
 };
 </script>
+<?php
+include './layout/footer.php';
+?>
 </body>
+
 </html>

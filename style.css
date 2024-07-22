@@ -592,7 +592,12 @@
     font-size: var(--fs-8);
     margin-block-start: 25px;
   }
-  
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
   .copyright-link { display: inline-block; }
   
   
