@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 $authenticated = false;
@@ -10,6 +11,17 @@ include 'db.php';
 
 // Implement search functionality
 $search_results = [];
+$photos = [];
+
+// Fetch photos for each restaurant and store them in an associative array
+$photo_query = "SELECT restaurant_id, url FROM photos";
+$photo_result = $conn->query($photo_query);
+if ($photo_result->num_rows > 0) {
+    while ($photo_row = $photo_result->fetch_assoc()) {
+        $photos[$photo_row['restaurant_id']][] = $photo_row['url'];
+    }
+}
+
 if (isset($_GET['search'])) {
     $search_term = $conn->real_escape_string($_GET['search']);
     $sql = "SELECT * FROM restaurants WHERE name LIKE '%$search_term%' OR category LIKE '%$search_term%'";
@@ -20,6 +32,7 @@ if (isset($_GET['search'])) {
         }
     }
 }
+
 $conn->close();
 ?>
 
@@ -32,7 +45,89 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Restaurants - Tastebuds</title>
     <link rel="stylesheet" href="./style.css">
+    <style>
+        /* General container styling */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Section title styling */
+.section-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Results list container styling */
+.results-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Individual result card styling */
+.result-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    width: calc(33.333% - 20px); /* Adjust the width as needed */
+    display: flex;
+    flex-direction: column;
+}
+
+.result-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Card image styling */
+.card-image {
+    background-size: cover;
+    background-position: center;
+    height: 150px;
+    width: 100%;
+}
+
+/* Card content styling */
+.card-content {
+    padding: 15px;
+}
+
+.card-content h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.card-content p {
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Details link styling */
+.details-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.details-link:hover {
+    color: #0056b3;
+}
+
+/* No results message styling */
+.no-results {
+    font-size: 18px;
+    color: #999;
+}
+</style>
 </head>
+
 
 <body>
 
@@ -45,7 +140,6 @@ $conn->close();
             <nav class="navbar" data-navbar>
                 <ul class="navbar-list">
                     <li class="navbar-item"><a href="index.php" class="navbar-link hover:underline" data-nav-link>Home</a></li>
-                    <li class="navbar-item"><a href="recent-post.php" class="navbar-link hover:underline" data-nav-link>Recent Post</a></li>
                 </ul>
             </nav>
             <div class="wrapper">
@@ -92,20 +186,27 @@ $conn->close();
     <section class="section search-results" aria-label="search results">
         <div class="container">
             <h2 class="h2 section-title">Search Results</h2>
-            <ul class="results-list" id="resultsList">
+            <div class="results-list" id="resultsList">
                 <?php if (!empty($search_results)): ?>
                     <?php foreach ($search_results as $restaurant): ?>
-                        <li class="result-item">
-                            <h3><?= htmlspecialchars($restaurant['name']) ?></h3>
-                            <p>Category: <?= htmlspecialchars($restaurant['category']) ?></p>
-                            <p>Rating: <?= number_format($restaurant['rating'], 1) ?></p>
-                            <a href="restaurant_page.php?id=<?= $restaurant['id'] ?>">View Details</a>
-                        </li>
+                        <?php
+                        $restaurant_id = $restaurant['id']; // Ensure you use the correct key for restaurant ID
+                        $image_url = !empty($photos[$restaurant_id]) ? htmlspecialchars($photos[$restaurant_id][0]) : 'default_image.jpg';
+                        ?>
+                        <div class="result-card">
+                            <div class="card-image" style="background-image: url('<?= $image_url ?>');"></div>
+                            <div class="card-content">
+                                <h3><?= htmlspecialchars($restaurant['name']) ?></h3>
+                                <p>Category: <?= htmlspecialchars($restaurant['category']) ?></p>
+                                <p>Rating: <?= number_format($restaurant['rating'], 1) ?></p>
+                                <a href="restaurant_page.php?id=<?= $restaurant['id'] ?>" class="details-link">View Details</a>
+                            </div>
+                        </div>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <li>No results found.</li>
+                    <div class="no-results">No results found.</div>
                 <?php endif; ?>
-            </ul>
+            </div>
         </div>
     </section>
 
