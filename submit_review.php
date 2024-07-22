@@ -13,6 +13,7 @@ if (!$authenticated) {
 // Retrieve form data
 $reviewerFirstName = isset($_SESSION['first_name']) ? htmlspecialchars($_SESSION['first_name']) : '';
 $reviewerLastName = isset($_SESSION['last_name']) ? htmlspecialchars($_SESSION['last_name']) : '';
+$reviewerEmail = isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '';
 $reviewText = isset($_POST['review_text']) ? $_POST['review_text'] : '';
 $rating = isset($_POST['rating']) ? intval($_POST['rating']) : 0;
 $restaurantId = isset($_POST['restaurant_id']) ? intval($_POST['restaurant_id']) : 0;
@@ -35,9 +36,9 @@ if ($conn->connect_error) {
 }
 
 // Insert new review into the database
-$insertSql = "INSERT INTO reviews (reviewer_name, review_text, rating, restaurant_id) VALUES (?, ?, ?, ?)";
+$insertSql = "INSERT INTO reviews (reviewer_name, review_text, rating, restaurant_id, email) VALUES (?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($insertSql);
-$stmt->bind_param("ssii", $reviewerName, $reviewText, $rating, $restaurantId);
+$stmt->bind_param("ssiss", $reviewerName, $reviewText, $rating, $restaurantId, $reviewerEmail);
 
 if ($stmt->execute()) {
     // Review added successfully, update restaurant rating

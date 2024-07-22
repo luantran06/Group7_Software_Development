@@ -7,7 +7,7 @@ if (isset($_SESSION['email'])) {
 // Assuming $_SESSION['first_name'] and $_SESSION['last_name'] are set after login
 // Assuming $_SESSION['first_name'] and $_SESSION['last_name'] are set after login
 $reviewerName = (isset($_SESSION['first_name']) && isset($_SESSION['last_name'])) ? htmlspecialchars($_SESSION['first_name']) . ' ' . htmlspecialchars($_SESSION['last_name']) : '';
-$reviewerEmail = isset($_SESSION['reviewer_email']) ? htmlspecialchars($_SESSION['reviewer_email']) : '';
+$reviewerEmail = isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 // Database connection settings
@@ -43,7 +43,7 @@ if ($photos_result->num_rows > 0) {
     }
 }
 // Fetch reviews
-$reviews_sql = "SELECT reviewer_name, review_text, rating FROM reviews WHERE restaurant_id = $restaurant_id";
+$reviews_sql = "SELECT id, reviewer_name, review_text, rating, email FROM reviews WHERE restaurant_id = $restaurant_id";
 $reviews_result = $conn->query($reviews_sql);
 $conn->close();
 ?>
@@ -223,7 +223,7 @@ body {
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 80%; 
     border-radius: 8px;
 }
 .close {
@@ -393,40 +393,22 @@ body {
                                 echo '<img src="assets/vectors/star-empty.png" alt="Empty star" class="star">';
                             }
                         }
-                        ?>
-                        
+                    ?>
                     </div>
                     <p><?php echo htmlspecialchars($review['review_text']); ?></p>
+                    <?php if ($authenticated && $review['email'] === $reviewerEmail): ?>
+                        <form action="delete_review.php" method="post" style="display: inline;">
+                            <input type="hidden" name="review_id" value="<?php echo htmlspecialchars($review['id']); ?>">
+                            <input type="hidden" name="restaurant_id" value="<?php echo htmlspecialchars($restaurant_id); ?>">
+                            <button type="submit" class="button" style="background-color: #E64042; color: white;">Delete</button>
+                        </form>
+                    <?php endif; ?>
                 </div>
             <?php endwhile; ?>
         <?php else: ?>
             <p>No reviews yet.</p>
         <?php endif; ?>
     </div>
-</div>
-<?php if ($authenticated): ?>
-    <div id="add-review-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <form id="add-review-form" action="submit_review.php" method="POST">
-                <input type="hidden" name="restaurant_id" value="<?php echo $restaurant_id; ?>">
-                <label for="reviewer_name">Name:</label>
-                <input type="text" id="reviewer_name" name="reviewer_name" value="<?php echo $reviewerName; ?>" disabled>
-                <label for="review_text">Review</label>
-                <textarea id="review_text" name="review_text" required></textarea>
-                <label for="rating">Rating</label>
-                <select id="rating" name="rating" required>
-                    <option value="5">5 Stars</option>
-                    <option value="4">4 Stars</option>
-                    <option value="3">3 Stars</option>
-                    <option value="2">2 Stars</option>
-                    <option value="1">1 Star</option>
-                </select>
-                <button type="submit">Submit Review</button>
-            </form>
-        </div>
-    </div>
-<?php endif; ?>
 
 
 <!-- The Modal -->

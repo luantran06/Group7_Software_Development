@@ -6,10 +6,10 @@ if (!isset($_SESSION['email'])) {
 }
 ?>
 
-<div class="container py-5">
+<div class="container profile-container py-5">
     <div class="row">
         <div class="col-lg-6 mx-auto border shadow p-4">
-            <h2 class="text-center mb-4">Profile</h2>
+            <h2 class="mb-4">Profile</h2>
             <hr />
             
             <table class="table table-striped">

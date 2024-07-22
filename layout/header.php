@@ -40,6 +40,32 @@ if (isset($_SESSION['email'])) {
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 </head>
+<style>
+.profile-container {
+    margin-left: 20px; 
+    margin-right: 20px; 
+}
+
+
+.profile-container {
+    padding-left: 20px; 
+    padding-right: 20px;
+}
+.table td, .table th {
+    text-align: left;
+}
+
+.profile-container {
+    margin-left: 20px;
+    margin-right: 20px; 
+}
+
+.profile-container {
+    padding-left: 20px; 
+    padding-right: 20px; 
+}
+
+</style>
 
 <body>
 
@@ -47,10 +73,10 @@ if (isset($_SESSION['email'])) {
     - #HEADER
   -->
 
-  <header class="header">
+  <header class="header section" data-header>
     <div class="container">
 
-      <a href="#" class="logo">
+      <a href="index.php" class="logo">
         <img src="./picture/logo.svg" width="100" height="40" alt="Tastebuds logo">
       </a>
 
@@ -59,9 +85,7 @@ if (isset($_SESSION['email'])) {
           <li class="navbar-item">
             <a href="index.php" class="navbar-link">Home</a>
           </li>
-          <li class="navbar-item">
-            <a href="index.php" class="navbar-link">Recent Post</a>
-          </li>
+
           <li class="navbar-item">
             <a href="search.html" class="navbar-link">Search</a>
           </li>

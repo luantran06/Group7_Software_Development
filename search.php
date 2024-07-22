@@ -46,7 +46,7 @@ $conn->close();
     <title>Search Restaurants - Tastebuds</title>
     <link rel="stylesheet" href="./style.css">
     <style>
-        /* General container styling */
+/* General container styling */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -74,7 +74,7 @@ $conn->close();
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
-    width: calc(33.333% - 20px); /* Adjust the width as needed */
+    width: calc(33.333% - 20px); 
     display: flex;
     flex-direction: column;
 }
@@ -190,7 +190,7 @@ $conn->close();
                 <?php if (!empty($search_results)): ?>
                     <?php foreach ($search_results as $restaurant): ?>
                         <?php
-                        $restaurant_id = $restaurant['id']; // Ensure you use the correct key for restaurant ID
+                        $restaurant_id = $restaurant['id']; 
                         $image_url = !empty($photos[$restaurant_id]) ? htmlspecialchars($photos[$restaurant_id][0]) : 'default_image.jpg';
                         ?>
                         <div class="result-card">
