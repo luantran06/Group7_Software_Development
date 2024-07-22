@@ -45,7 +45,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `phone`, `address`, `password`, `role`, `created_at`, `is_admin`) VALUES
-(3, 'Admin', 'Account', 'email@gmail.com', '5554446666', 'address', '$2y$10$H0k0IrDVJSVcg8SjJ/F6q.MD0gwsPGPqDx0tZ83LLlD9ocl1EDtU2', 'client', '2024-07-16 02:24:00', 0);
+(3, 'Admin', 'Account', 'email@gmail.com', '5554446666', 'address', '$2y$10$H0k0IrDVJSVcg8SjJ/F6q.MD0gwsPGPqDx0tZ83LLlD9ocl1EDtU2', 'client', '2024-07-16 02:24:00', 1);
 
 --
 -- Indexes for dumped tables
