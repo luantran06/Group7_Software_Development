@@ -265,6 +265,64 @@ body {
     display: block; /* Prevent extra space below images */
     border-radius: 8px;
 }
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px; /* Adjust spacing if needed */
+}
+
+.footer-brand {
+  margin-right: 20px; /* Space between logo and sections */
+}
+
+.footer-sections-wrapper {
+  display: flex;
+  flex: 1;
+  align-items: flex-start; /* Aligns the sections and claim link at the top */
+  justify-content: space-between; /* Distributes space between sections and the claim link */
+}
+
+.footer-sections {
+  display: flex;
+  gap: 20px; /* Space between the sections */
+}
+
+.claim-link-container {
+  display: flex;
+  align-items: flex-start; /* Aligns the link to the top */
+  margin-left: 20px; /* Space from the left edge */
+}
+
+.claim-business-link {
+  color: #007BFF; /* Blue color for the link */
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.claim-business-link:hover {
+  text-decoration: underline;
+  color: #0056b3; /* Darker blue on hover */
+}
+
+.footer-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-list-item {
+  margin: 0;
+  padding: 0;
+}
+
+.footer-bottom {
+  text-align: center;
+}
+
 </style>
 </head>
 <body>
@@ -450,6 +508,100 @@ body {
     
 </div>
 
+<!-- 
+  - #FOOTER
+-->
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top section">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <img src="./picture/logo.svg" width="129" height="40" alt="Blogy logo">
+        </a>
+        <p class="footer-text">
+          The best review website for the greater Atlanta area.
+        </p>
+      </div>
+
+      <!-- Wrapper for the three sections -->
+      <div class="footer-sections-wrapper">
+        <div class="footer-sections">
+          <ul class="footer-list">
+            <li>
+              <p class="h5">Social</p>
+            </li>
+            <li class="footer-list-item">
+              <ion-icon name="logo-facebook"></ion-icon>
+              <a href="#" class="footer-link hover:underline">Facebook</a>
+            </li>
+            <li class="footer-list-item">
+              <ion-icon name="logo-twitter"></ion-icon>
+              <a href="#" class="footer-link hover:underline">Twitter</a>
+            </li>
+            <li class="footer-list-item">
+              <ion-icon name="logo-pinterest"></ion-icon>
+              <a href="#" class="footer-link hover:underline">Pinterest</a>
+            </li>
+            <li class="footer-list-item">
+              <ion-icon name="logo-vimeo"></ion-icon>
+              <a href="#" class="footer-link hover:underline">Vimeo</a>
+            </li>
+          </ul>
+
+          <ul class="footer-list">
+            <li>
+              <p class="h5">About</p>
+            </li>
+            <li>
+              <a href="#" class="footer-link hover:underline">Style Guide</a>
+            </li>
+            <li>
+              <a href="#" class="footer-link hover:underline">Features</a>
+            </li>
+            <li>
+              <a href="#" class="footer-link hover:underline">Contact</a>
+            </li>
+            <li>
+              <a href="#" class="footer-link hover:underline">404</a>
+            </li>
+            <li>
+              <a href="#" class="footer-link hover:underline">Privacy Policy</a>
+            </li>
+          </ul>
+
+          <ul class="footer-list">
+            <li>
+              <p class="h5">Features</p>
+            </li>
+            <li>
+              <a href="#" class="footer-link hover:underline">Upcoming Events</a>
+            </li>
+            <li>
+              <a href="#" class="footer-link hover:underline">Blog & News</a>
+            </li>
+            <li>
+              <a href="#" class="footer-link hover:underline">Features</a>
+            </li>
+            <li>
+              <a href="#" class="footer-link hover:underline">FAQ Question</a>
+            </li>
+            <li>
+              <a href="#" class="footer-link hover:underline">Testimonial</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- "Claim this business" link -->
+        <div class="claim-link-container">
+          <a href="#" class="claim-business-link">Claim this business</a>
+        </div>
+      </div>
+    </div>
+
+    
+</footer>
+
 <script>
 
 
@@ -494,9 +646,7 @@ window.onclick = function(event) {
     }
 };
 </script>
-<?php
-include './layout/footer.php';
-?>
+
 </body>
 
 </html>
