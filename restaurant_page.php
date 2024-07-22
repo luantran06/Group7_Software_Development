@@ -414,28 +414,31 @@ body {
                 <span class="span three"></span>
             </button>
 
-            <?php
-            if ($authenticated) {
-            ?>
-            <li class="navbar-item dropdown">
-                <a href="#" class="navbar-link hover:underline" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <?= htmlspecialchars($_SESSION['first_name']) ?>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a href="logout.php" class="dropdown-item">Logout</a></li>
-                </ul>
-            </li>
-            <?php
-            } else {
-            ?>
-            <a href="./loginpage.php" class="btn">Log in</a>
-            <a href="./register.php" class="btn">Register</a>
-            <?php
-            }
-            ?>
-        </div> 
+
+        <?php
+        if ($authenticated) {
+        ?>
+
+        <li class="navbar-item dropdown">
+            <a href="#" class="navbar-link hover:underline" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <?= htmlspecialchars($_SESSION['first_name']) ?>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a href="logout.php" class="dropdown-item" >Logout</a></li>
+        </ul>
+        </li>
+
+        <?php
+        } else {
+        ?>
+        <a href="./loginpage.php" class="btn">Log in</a>
+        <a href="./register.php" class="btn">Register</a>
+        <?php
+        }   
+        ?>
+      </div>
     </div>
 </header>
 <!-- Ionicons script -->
@@ -571,52 +574,6 @@ body {
     
 </div>
 
-
-
-<script>
-
-
-// Get the modal
-var modal = document.getElementById("add-review-modal");
-// Get the button that opens the modal
-var btn = document.getElementById("add-review-button");
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-// When the user clicks the button, open the modal
-if (btn) {
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-}
-// When the user clicks on <span> (x), close the modal
-if (span) {
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-}
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-
-document.getElementById('add-review-button').addEventListener('click', function() {
-    var modal = document.getElementById('reviewModal');
-    modal.style.display = 'block';
-});
-document.querySelector('.close').addEventListener('click', function() {
-    var modal = document.getElementById('reviewModal');
-    modal.style.display = 'none';
-});
-window.onclick = function(event) {
-    var modal = document.getElementById('reviewModal');
-    if (event.target == modal) {
-        modal.style.display = 'none';
-    }
-};
-</script>
 <!-- 
   - #FOOTER
 -->
@@ -710,6 +667,52 @@ window.onclick = function(event) {
 
     
 </footer>
+
+<script>
+
+
+// Get the modal
+var modal = document.getElementById("add-review-modal");
+// Get the button that opens the modal
+var btn = document.getElementById("add-review-button");
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+// When the user clicks the button, open the modal
+if (btn) {
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+}
+// When the user clicks on <span> (x), close the modal
+if (span) {
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
+document.getElementById('add-review-button').addEventListener('click', function() {
+    var modal = document.getElementById('reviewModal');
+    modal.style.display = 'block';
+});
+document.querySelector('.close').addEventListener('click', function() {
+    var modal = document.getElementById('reviewModal');
+    modal.style.display = 'none';
+});
+window.onclick = function(event) {
+    var modal = document.getElementById('reviewModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+};
+</script>
+
 </body>
 
 </html>
