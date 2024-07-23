@@ -157,6 +157,11 @@ if ($stmt = $conn_restaurant->prepare($reviews_sql)) {
 
 $canReply = $authenticated && isset($user_restaurant_id) && $user_restaurant_id == $restaurant_id;
 
+if ($authenticated) {
+    echo '<a href="restaurantRegister.php?restaurant_id=<?= $restaurant_id ?>">Claim this business</a>';
+}
+
+
 $conn_restaurant->close();
 ?>
 
@@ -761,8 +766,10 @@ $conn_restaurant->close();
 
         <!-- "Claim this business" link -->
         <div class="claim-link-container">
-          <a href="restaurantRegister.php" class="claim-business-link">Claim this business</a>
+        <a href="restaurantRegister.php?restaurant_id=<?= $restaurant_id ?>" style="color: blue;font-weight: 600">Claim this business</a>
+
         </div>
+
       </div>
     </div>
 
