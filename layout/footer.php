@@ -14,7 +14,7 @@
           </a>
 
           <p class="footer-text">
-            A minimal, functional theme for running a paid-membership publication on Team 7.
+            The best review website for the greater Atlanta area.
           </p>
 
         </div>
