@@ -761,7 +761,7 @@ $conn_restaurant->close();
 
         <!-- "Claim this business" link -->
         <div class="claim-link-container">
-          <a href="#" class="claim-business-link">Claim this business</a>
+          <a href="restaurantRegister.php" class="claim-business-link">Claim this business</a>
         </div>
       </div>
     </div>
