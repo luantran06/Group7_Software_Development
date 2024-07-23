@@ -1,38 +1,27 @@
-# Group7_Software_Development
-Software_Development_Summer
-Review website/application
-- Design a website where users can write and share reviews for products, services or businesses.
-- For example, you could make a review app that specializes in letting users share their thoughts on films, medical providers, travel locations or local businesses. To make the project more advanced, you could also allow companies to respond to reviews about their products or services...
-  # Restaurants list:
-- Lazy Betty
-- Gunshow
-- BoccaLupo
-- Bones
-- Umi
-- Taqueria del Sol
-- Aria 
-- Chai Yo Modern Thai
-- chastain
-- Tiny Lou
-- The Select
-- Yebo Beach Haus
-- Le Bilboquet
-- Bistro Niko
-- The Alden
-- La Grotta
-- St. Cecilia
-- Ruby Chow
--
--
-create a table for "user"
-CREATE TABLE users (
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    email VARCHAR(200) NOT NULL UNIQUE,
-    phone VARCHAR(20) NOT NULL,
-    address VARCHAR(200) NOT NULL,
-    password VARCHAR(200) NOT NULL,
-    role VARCHAR(20) NOT NULL DEFAULT 'client',
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+#TasteBuds - Restaurant Review Site
+
+##Introduction
+Welcome to TasteBuds, a restaurant review site that allows users to share their dining experiences and helps restaurant owners engage with their customers.
+
+##Group Members
+-Raya Deb
+-Cao Cong Luan Tran
+-Joseph Paxton
+-Brian Kim
+-Raj Bains
+
+##Key Features
+-Search Bar: Easily search for restaurants based on name, location, or cuisine.
+-Log In Functuality: register and log into your personal account, or claim your restaurant and create a business account.
+-User Reviews: Users can leave reviews and rate their dining experiences.
+-Business Replies: Business owners can reply to user reviews, promoting engagement and customer service.
+-Admin Functionality: Admins can manage user's reviews, keeping the site clean.
+
+##Technologies Used
+-HTML: Structuring the web pages.
+-CSS: Styling and layout of the web pages.
+-PHP: Backend scripting and server-side logic.
+-MySQL: Database management and queries.
+-phpMyAdmin: Database administration and management.
+-Git: Version control and project collaboration.
+-JavaScript: Client-side scripting for interactive features.
