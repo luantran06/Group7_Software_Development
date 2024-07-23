@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2024 at 12:31 AM
+-- Generation Time: Jul 23, 2024 at 03:21 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -49,7 +49,7 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `phone`, `address
 (3, 'Admin', 'Account', 'email@gmail.com', '5554446666', 'address', '$2y$10$H0k0IrDVJSVcg8SjJ/F6q.MD0gwsPGPqDx0tZ83LLlD9ocl1EDtU2', 'client', '2024-07-16 02:24:00', 1, NULL),
 (4, 'Jane', 'Smith', 'janesmith@email.com', '5555555555', 'Jane Smith Address', '$2y$10$xTdzcAFzbrTljXQzllWTGObwQQEE/SKzbLPimEIpa5G2aYwnEvRhi', 'client', '2024-07-22 06:39:44', 0, NULL),
 (5, 'John', 'Smith', 'johnsmith@email.com', '5555555554', 'johnsmith', '$2y$10$7aU36J14go03GZNWl5T.iOLLxmWHZ0HtTAB5qcYylWS.PqVMrAmg6', 'client', '2024-07-22 07:01:55', 0, NULL),
-(6, 'Restaurant A', '', 'restaurantA@gmail.com', '5555555555', 'Restaurant A, Atlanta', '$2y$10$62bT7/o8EFyUjlWNFa32GePW1SxA7R/U29wilWfV.IM78lidGEiuC', 'business', '2024-07-22 21:55:07', 0, NULL);
+(6, 'Restaurant A', '', 'restaurantA@gmail.com', '5555555555', 'Restaurant A, Atlanta', '$2y$10$62bT7/o8EFyUjlWNFa32GePW1SxA7R/U29wilWfV.IM78lidGEiuC', 'business', '2024-07-22 21:55:07', 0, 4);
 
 --
 -- Indexes for dumped tables
