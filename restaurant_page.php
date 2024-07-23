@@ -21,6 +21,7 @@ if (isset($_SESSION['email'])) {
     $authenticated = true;
     $reviewerEmail = $_SESSION['email'];
     
+    
     // Connect to the users database
     $conn_users = new mysqli($servername, $username, $password, $database_users);
     if ($conn_users->connect_error) {
@@ -41,6 +42,7 @@ if (isset($_SESSION['email'])) {
     } else {
         echo "Error preparing statement: " . $conn_users->error;
     }
+    $reviewerName = (isset($_SESSION['first_name']) && isset($_SESSION['last_name'])) ? htmlspecialchars($_SESSION['first_name']) . ' ' . htmlspecialchars($_SESSION['last_name']) : '';
 
     // Fetch the restaurant ID for the authenticated user
     $user_restaurant_sql = "SELECT restaurant_id FROM users WHERE email = ?";
@@ -157,9 +159,7 @@ if ($stmt = $conn_restaurant->prepare($reviews_sql)) {
 
 $canReply = $authenticated && isset($user_restaurant_id) && $user_restaurant_id == $restaurant_id;
 
-if ($authenticated) {
-    echo '<a href="restaurantRegister.php?restaurant_id=<?= $restaurant_id ?>">Claim this business</a>';
-}
+
 
 
 $conn_restaurant->close();

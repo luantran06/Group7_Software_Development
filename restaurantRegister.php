@@ -15,12 +15,16 @@ $business_name = "";
 $email = "";
 $phone = "";
 $address = "";
+$first_name = "";
+$last_name = "";
 
 // Initialize errors
 $business_name_error = "";
 $email_error = "";
 $phone_error = "";
 $address_error = "";
+$first_name_error = "";
+$last_name_error = "";
 $password_error = "";
 $confirm_password_error = "";
 
@@ -61,11 +65,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $address = $_POST['address'];
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
     if (empty($business_name)) {
         $business_name_error = "Business name is required";
+        $error = true;
+    }
+
+    if (empty($first_name)) {
+        $first_name_error = "First name is required";
+        $error = true;
+    }
+
+    if (empty($last_name)) {
+        $last_name_error = "Last name is required";
         $error = true;
     }
 
@@ -79,6 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dbConnection = getDatabaseConnectionUsers();
 
     $statement = $dbConnection->prepare("SELECT id FROM users WHERE email = ?");
+    if ($statement === false) {
+        die('Failed to prepare SQL statement: ' . $dbConnection->error);
+    }
     $statement->bind_param("s", $email);
     $statement->execute();
     $result = $statement->get_result();
@@ -104,17 +123,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!$error) {
         $password = password_hash($password, PASSWORD_DEFAULT);
         $created_at = date('Y-m-d H:i:s');
-        $statement = $dbConnection->prepare("INSERT INTO users (first_name, last_name, email, phone, address, password, created_at) VALUES (?,?,?,?,?,?,?)");
-        $statement->bind_param("sssssss", $first_name, $last_name, $email, $phone, $address, $password, $created_at);
+        $role = "restaurant"; // Assuming role is 'restaurant'
+        $is_admin = 0; // Assuming this is not an admin
+        $statement = $dbConnection->prepare("INSERT INTO users (first_name, last_name, email, phone, address, password, role, created_at, is_admin, restaurant_id) VALUES (?,?,?,?,?,?,?,?,?,?)");
+        if ($statement === false) {
+            die('Failed to prepare SQL statement: ' . $dbConnection->error);
+        }
+        $statement->bind_param("sssssssiis", $first_name, $last_name, $email, $phone, $address, $password, $role, $created_at, $is_admin, $restaurant_id);
         $statement->execute();
         $insert_id = $dbConnection->insert_id;
         $statement->close();
 
+        // Set session variables
         $_SESSION['user_id'] = $insert_id;
         $_SESSION['business_name'] = $business_name;
         $_SESSION['email'] = $email;
         $_SESSION['phone'] = $phone;
         $_SESSION['address'] = $address;
+        $_SESSION['first_name'] = $first_name; // Set first name
+        $_SESSION['last_name'] = $last_name;   // Set last name
         $_SESSION['created_at'] = $created_at;
         header("Location: index.php");
         exit;
@@ -148,6 +175,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
 
                 <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="first_name" name="first_name" value="<?= htmlspecialchars($first_name) ?>" required>
+                    <span class="text-danger"><?= $first_name_error ?></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name" name="last_name" value="<?= htmlspecialchars($last_name) ?>" required>
+                    <span class="text-danger"><?= $last_name_error ?></span>
+                </div>
+
+                <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="text" id="email" name="email" value="<?= htmlspecialchars($email) ?>" required>
                     <span class="text-danger"><?= $email_error ?></span>
@@ -164,11 +203,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" id="address" name="address" value="<?= htmlspecialchars($address) ?>" required>
                     <span class="text-danger"><?= $address_error ?></span>
                 </div>
+
                 <div class="form-group">
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" required>
                     <span class="text-danger"><?= $password_error ?></span>
                 </div>
+
                 <div class="form-group">
                     <label for="confirm_password">Confirm Password:</label>
                     <input type="password" id="confirm_password" name="confirm_password" required>
