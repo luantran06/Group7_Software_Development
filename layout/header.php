@@ -20,6 +20,11 @@ if (isset($_SESSION['email'])) {
   <title>Tastebuds - Hey, we’re Tastebuds. See our thoughts, stories and restaurants.</title>
   <meta name="title" content="Tastebuds - Hey, we’re Tastebuds. See our thoughts, stories and restaurants.">
   <meta name="description" content="This is a restaurant review blog.">
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
   <!-- 
     - favicon
@@ -80,36 +85,53 @@ if (isset($_SESSION['email'])) {
         <img src="./picture/logo.svg" width="100" height="40" alt="Tastebuds logo">
       </a>
 
-      <nav class="navbar">
+      <nav class="navbar" data-navbar>
         <ul class="navbar-list">
-          <li class="navbar-item">
-            <a href="index.php" class="navbar-link">Home</a>
-          </li>
 
-          <li class="navbar-item">
-            <a href="search.html" class="navbar-link">Search</a>
-          </li>
+        <li class="navbar-item">
+            <a href="index.php" class="navbar-link hover:underline" data-nav-link>Home</a>
+        </li>
 
-          <?php if ($authenticated): ?>
-            <li class="navbar-item dropdown">
-              <a href="#" class="navbar-link hover:underline" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/profile.php">Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="/logout.php">Logout</a></li>
-              </ul>
-            </li>
-          <?php else: ?>
-            <li class="navbar-item">
-              <a href="./loginpage.php" class="navbar-link">Log in</a>
-            </li>
-            <li class="navbar-item">
-              <a href="./register.php" class="navbar-link">Register</a>
-            </li>
-          <?php endif; ?>
+        
+
         </ul>
       </nav>
 
+        <div class="wrapper">
+                 <a href="search.php" class="search-btn" aria-label="search">
+                    <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+                    <span class="span">Search</span>
+                </a>
+                <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
+                    <span class="span one"></span>
+                    <span class="span two"></span>
+                    <span class="span three"></span>
+                </button>
+
+        <?php
+        if ($authenticated) {
+        ?>
+
+        <li class="navbar-item dropdown">
+            <a href="#" class="navbar-link hover:underline" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <?= htmlspecialchars($_SESSION['first_name']) ?>
+            </a>
+        <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/profile.php">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a href="/logout.php" class="dropdown-item" >Logout</a></li>
+        </ul>
+        </li>
+            
+        <?php
+        } else {
+        ?>
+        <a href="./loginpage.php" class="btn">Log in</a>
+        <a href="./register.php" class="btn">Register</a>
+        <?php
+        }   
+        ?>
+      </div>
     </div>
   </header>
 
