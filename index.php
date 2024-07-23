@@ -497,9 +497,6 @@ if (isset($_SESSION['email'])) {
 
       <div class="section footer-bottom">
 
-        <p class="copyright">
-          &copy; Team 7 2024. Published by <a href="#" class="copyright-link hover:underline">Team 7</a>.
-        </p>
 
       </div>
 

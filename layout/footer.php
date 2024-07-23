@@ -107,41 +107,11 @@
 
         </ul>
 
-        <ul class="footer-list">
-
-          <li>
-            <p class="h5">Membership</p>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link hover:underline">Account</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link hover:underline">Membership</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link hover:underline">Subscribe</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link hover:underline">Tags</a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link hover:underline">Authors</a>
-          </li>
-
-        </ul>
+        
 
       </div>
 
       <div class="section footer-bottom">
-
-        <p class="copyright">
-          &copy; Team 7 2024. Published by <a href="#" class="copyright-link hover:underline">Team 7</a>.
-        </p>
 
       </div>
 
